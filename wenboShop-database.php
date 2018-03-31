@@ -5,7 +5,7 @@ class DBConnection {
 	private $conn;
 
 	private function getConnInstance(){
-		if (!$conn) {
+		if (!$this->conn) {
 			$this->conn = new PDO('mysql:host=localhost;dbname=Shop;charset=utf8mb4','root','root');
 		}
 		return $this->conn;
