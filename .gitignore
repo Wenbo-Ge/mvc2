@@ -1,0 +1,5 @@
+vendor/*vendor/*
+:w
+t status
+vendor/*
+

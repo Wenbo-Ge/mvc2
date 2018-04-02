@@ -44,14 +44,21 @@ require_once('wenboShop-database.php');
             <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="<?php echo $value->getImgUrl(); ?>" alt="Card image cap">
             <div class="card-body">
-              <p class="card-title"><?php
+              <p class="card-title">
+                <?php
                   echo $value->getName();
                   ?></p>
-              <p class="card-text"><?php
+                  
+              <p class="card-text">
+                <span class="card-price">
+                    <?php
                   echo $value->getPrice();
-                  ?></p>
+                  ?>
+                  </span>
+                </p>
               <p class=quantity></p>
-              <button class="btn btn-success" onclick="addPrice('<?php echo $value->getPrice();?>')">Purchase</button>
+             <!--  如果不在button里加data-price的数据，就必须往上或往下找.parent或.children -->
+              <button class="btn btn-success purchase">Purchase</button>
             </div>
         </div>
         </div>
@@ -66,38 +73,18 @@ require_once('wenboShop-database.php');
         </div>
 
 <script type="text/javascript">
-
-  // 定义了price
-  function addPrice(price){
-    // 用console来测试
-    // 这里使用了price
-    // console.log(price);
-    // text抓取数据，html可以加东西，val用在input里
-    // .html('<h1>ni hao</h>');
-    var current_price=$('.TotalPrice').text();
-    // parseInt将字符变成整数，
-    // parseFloat将字符变成数。
-    $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
-  }
-
-  // $(document).ready(function(){
-  //     $('button.btn btn-success').click(function(){
-  //       var quantity = $('p.quantity').val();
-  //       quantity.val(parseInt(quantity.val())+1);
-  //       setTotal();
-  //     });  
-
-  //   function setTotal(){
-  //   var initial=$('span.TotalPrice').val();
-  //   initial += parseInt($('p.quantity').val())*parseFloat($('p.card-text').text());
-  //   $('span.TotalPrice').html(initial.toFixed(2));
-  // }
-
-  // setTotal();
-
-  // });
+  
 
   
+  // 第三种向上找；
+  $('.purchase').click(function(){
+   var price=($(this).parents('.card-body').find('.card-price').text());
+   var current_price=$('.TotalPrice').text();
+   $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
+  
+  });
+  
+   
 
 
 </script>

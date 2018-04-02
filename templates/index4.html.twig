@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shopping</title>
+</head>
+<body>
+	<ul>
+		<!-- twig里的循环语法 -->
+		{% for a in result %}
+			<li>{{a.name | lower}}</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>
