@@ -17,7 +17,7 @@ require_once('wenboShop-database.php');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>SHOP</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style type="text/css">
     	.card-text{
     		text-align: right;
@@ -27,7 +27,7 @@ require_once('wenboShop-database.php');
     	.card-title{
     		font-weight: bold;
     	}
-    	a{
+    	button{
     		float: right;
     	}
 
@@ -53,7 +53,8 @@ require_once('wenboShop-database.php');
               <p class="card-text"><?php
                   echo $value->getPrice();
                   ?></p>
-              <a href="#" class="btn btn-success">Purchase</a>
+              <p class=quantity></p>
+              <button class="btn btn-success">Purchase</button>
             </div>
         </div>
         </div>
@@ -63,13 +64,35 @@ require_once('wenboShop-database.php');
   </div>
 </div>
 
-<div style="background-color: #ddd; color: #222; position:fixed; right: 2rem; bottom: 2rem; padding: 1rem 2.5rem; border-radius: 1rem">
+<div style="background-color: #ddd; position:fixed; right: 2rem; bottom: 2rem; padding: 1rem 2.5rem; border-radius: 1rem">
           Total: <span class="TotalPrice">0</span>
         </div>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('button.btn btn-success').click(function(){
+        var quantity = $('p.quantity').val();
+        quantity.val(parseInt(quantity.val())+1);
+        setTotal();
+      });  
+
+    function setTotal(){
+    var initial=$('span.TotalPrice').val();
+    initial += parseInt($('p.quantity').val())*parseFloat($('p.card-text').text());
+    $('span.TotalPrice').html(initial.toFixed(2));
+  }
+
+  setTotal();
+
+  });
+
+  
+
+
+</script>
 	
 
- 
+
 
 
     <!-- Optional JavaScript -->
