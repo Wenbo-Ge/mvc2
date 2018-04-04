@@ -36,17 +36,18 @@
 
 		<div class="col">
             <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src='{{items.image_url}}' alt="Card image cap">
+            <img class="card-img-top" src='{{items.ImgUrl}}' alt="Card image cap">
             <div class="card-body">
               <p class="card-title">
-              		{{items.name}}
+                <!-- items.Name里的Name是getName里的Name；items.name=getName -->
+              		{{items.Name}} 
               </p>
               <p class="card-text">
-              		{{items.price}}
+              		{{items.Price}}
               </p>
               
             <div class="text-right">
-            	<button class="btn btn-success" >Purchase</button>
+            	<button class="btn btn-success purchase" data-price="{{items.Price}}">Purchase</button>
             </div>
               
             </div>
@@ -61,7 +62,16 @@
           Total: <span class="TotalPrice">0</span>
         </div>
 
-
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.purchase').click(function(){
+        var price=$('.purchase').data('price');
+        var current_price=$('.TotalPrice').text();
+        $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
+      });
+      
+    });
+  </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
