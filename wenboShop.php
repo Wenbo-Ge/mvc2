@@ -75,6 +75,8 @@ require_once('wenboShop-database.php');
 </div>
 
 <script type="text/javascript">
+// 什么时候用$(document).ready(function(){})?????
+
 
   // 定义了price
   function addPrice(price){

@@ -13,6 +13,8 @@ require_once('iShop-database.php');
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <title>iShop</title>
   </head>
   <body>
@@ -37,7 +39,7 @@ require_once('iShop-database.php');
           <div class="card-body">
             <h5 class="card-title"><?php echo $value->getName(); ?></h5>
             <p class="card-text"><?php echo $value->getPrice(); ?></p>
-            <a href="#" class="btn btn-primary">Purchase</a>
+            <button class="btn btn-primary purchase" data-price='<?php echo $value->getPrice(); ?>' onclick="add('<?php echo $value->getPrice(); ?>')">Purchase</button>
           </div>
           </div>
         </div>
@@ -46,6 +48,30 @@ require_once('iShop-database.php');
 ?>
       </div>
     </div>
+
+    <div style="background-color: #ddd; position:fixed; right: 2rem; bottom: 2rem; padding: 1rem 2.5rem; border-radius: 1rem">
+          Total: <span class="TotalPrice">0</span>
+    </div>
+
+<!-- 添加js动动态 -->
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('.purchase').click(function(){
+          var price= $(this).data('price');
+          var current_price=$('.TotalPrice').text();
+          $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
+      });
+  });
+      
+
+      // function add(price){
+      //   console.log(price);
+      //   var current_price=$('.TotalPrice').text();
+      //   $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
+      // }
+      
+  
+</script>
 
 
     
