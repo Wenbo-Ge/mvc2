@@ -1,8 +1,8 @@
 <?php
 require_once('wenboShop-database.php');
 //要require vendor文件夹里的autoload
-require_once './vendor/autoload.php';
-// 创建文件加载对象，并且定义了路径
+require_once ('./vendor/autoload.php');
+// 创建文件加载对象，并且定义了路径 
 $loader = new Twig_Loader_Filesystem('./templates');
 $twig = new Twig_Environment($loader);
 

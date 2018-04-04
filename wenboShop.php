@@ -24,9 +24,7 @@ require_once('wenboShop-database.php');
     	.card-title{
     		font-weight: bold;
     	}
-    	button{
-    		float: right;
-    	}
+    	
 
     </style>
   </head>
@@ -42,7 +40,7 @@ require_once('wenboShop-database.php');
 ?>
         <div class="col">
             <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<?php echo $value->getImgUrl(); ?>" alt="Card image cap">
+            <img class="card-img-top" src="<?php echo $value->getImgUrl(); ?>" alt="Card image cap" onmouseover="alert('<?php echo $value->getDescription(); ?>')">
             <div class="card-body">
               <p class="card-title"><?php
                   echo $value->getName();
@@ -50,20 +48,31 @@ require_once('wenboShop-database.php');
               <p class="card-text"><?php
                   echo $value->getPrice();
                   ?></p>
-              <p class=quantity></p>
-              <button class="btn btn-success" onclick="addPrice('<?php echo $value->getPrice();?>')">Purchase</button>
+              <div class="text-right">
+               <!--  <button class="btn btn-info" onclick="show('<?php echo $value->getDescription();?>')">Detail</button> -->
+                <button class="btn btn-success" onclick="addPrice('<?php echo $value->getPrice();?>')">Purchase</button>
+
+              </div>
+              
+            <div class="text-left" style="overflow: scroll; height: 20vh; display: none;">
+              <?php echo $value->getDescription(); ?>
+            </div>
+            </div>
             </div>
         </div>
-        </div>
+
+        
 <?php
 }
 ?>
   </div>
 </div>
 
+
+
 <div style="background-color: #ddd; position:fixed; right: 2rem; bottom: 2rem; padding: 1rem 2.5rem; border-radius: 1rem">
           Total: <span class="TotalPrice">0</span>
-        </div>
+</div>
 
 <script type="text/javascript">
 
@@ -80,22 +89,13 @@ require_once('wenboShop-database.php');
     $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
   }
 
-  // $(document).ready(function(){
-  //     $('button.btn btn-success').click(function(){
-  //       var quantity = $('p.quantity').val();
-  //       quantity.val(parseInt(quantity.val())+1);
-  //       setTotal();
-  //     });  
 
-  //   function setTotal(){
-  //   var initial=$('span.TotalPrice').val();
-  //   initial += parseInt($('p.quantity').val())*parseFloat($('p.card-text').text());
-  //   $('span.TotalPrice').html(initial.toFixed(2));
-  // }
+ 
 
-  // setTotal();
 
-  // });
+  
+
+ 
 
   
 
