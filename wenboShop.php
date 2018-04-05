@@ -49,7 +49,7 @@ require_once('wenboShop-database.php');
                   echo $value->getPrice();
                   ?></p>
               <div class="text-right">
-               <!--  <button class="btn btn-info" onclick="show('<?php echo $value->getDescription();?>')">Detail</button> -->
+              
                 <button class="btn btn-success" onclick="addPrice('<?php echo $value->getPrice();?>')">Purchase</button>
 
               </div>
@@ -70,9 +70,10 @@ require_once('wenboShop-database.php');
 
 
 
-<div style="background-color: #ddd; position:fixed; right: 2rem; bottom: 2rem; padding: 1rem 2.5rem; border-radius: 1rem">
+<div style="background-color: #ddd; position:fixed; right: 2rem; bottom: 3rem; padding: 1rem 2.5rem; border-radius: 1rem">
           Total: <span class="TotalPrice">0</span>
 </div>
+<button class="btn btn-primary submit" style="position:fixed; right: 2rem; bottom: 0.5rem; border-radius: 1rem" onclick="submitTotal()">Submit</button>
 
 <script type="text/javascript">
 // 什么时候用$(document).ready(function(){})?????
@@ -91,7 +92,19 @@ require_once('wenboShop-database.php');
     $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
   }
 
-
+  function submitTotal(){
+    var submit=$('.TotalPrice').text();
+    console.log(submit);
+    $.ajax({
+      url:'ajax.php',
+      type:'POST',
+      data:{submitInfo:submit},
+      dataType:'json',
+      success: function(data){
+        alert(data.res);
+      }
+    })
+  }
  
 
 
