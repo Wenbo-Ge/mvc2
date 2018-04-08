@@ -1,6 +1,6 @@
 <?php
 
-if ($_POST['submitInfo']) {
+if ($_POST['submitTotal']) {
 	$response = array(
 		'res'=>'Purchase successful!'
 	);

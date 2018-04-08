@@ -32,11 +32,11 @@
     <div class="container">
   		<div class="row">
   			<!-- twig里的循环语法 -->
-			{% for items in result %}
+			{% for items in twig %}
 
 		<div class="col">
             <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src='{{items.ImgUrl}}' alt="Card image cap" onmouseover="alert('{{items.Description}}')">
+            <img class="card-img-top" src='{{items.Img_url}}' alt="Card image cap" data-description='{{items.Description}}'>
             <!-- 为什么39行用了onmouseover却只能显示第四张图片和最后一张图片的description？？ -->
             <div class="card-body">
               <p class="card-title">
@@ -50,14 +50,18 @@
             <div class="text-right">
             	<button class="btn btn-success purchase" data-price="{{items.Price}}">Purchase</button>
             </div>
-              
+            
+            
+
             </div>
             </div>
         </div>
-				
+				<div id="des" style="position: fixed; bottom: 5rem; width:80vw; text-align: justify; z-index: 9; background-color: black;color: white;border-radius: 0.5rem;" ></div>
 			{% endfor %}
 		</div>
 	</div>
+
+  
 
 	<div style="background-color: #ddd; position:fixed; right: 2rem; bottom: 3rem; padding: 1rem 2.5rem; border-radius: 1rem">
           Total: <span class="TotalPrice">0</span>
@@ -67,12 +71,33 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
+         
       $('.purchase').click(function(){
-        //69行如果写成$('.purchase')，console.log(price)全是69.90? $(this) 不等于$('.purchase')吗？
+        // 如果写成$('.purchase')，console.log(price)全是69.90? $(this) 不等于$('.purchase')吗？this 指向的是被调用的那一个
+
         var price=$(this).data('price');
         console.log(price);
         var current_price=$('.TotalPrice').text();
         $('.TotalPrice').text((parseFloat(current_price)+parseFloat(price)).toFixed(2));
+
+        if (price='') {
+            $(this).attr('disabled', false);
+          } else {
+            $(this).attr('disabled', true);
+          }
+      });
+
+
+
+      
+
+      $('.card-img-top').mouseover(function(){
+         var des=$(this).data('description');
+         $('#des').text(des);
+      });
+      $('.card-img-top').mouseout(function(){
+         // var des=$(this).data('description');
+         $('#des').text('');
       });
     });
 
@@ -82,7 +107,9 @@
     $.ajax({
       url:'ajax.php',
       type:'POST',
-      data:{submitInfo:submit},
+      data:{
+          submitTotal:submit
+      },
       dataType:'json',
       success: function(data){
         alert(data.res);

@@ -57,10 +57,10 @@ class Item {
 		return $this;
 	}
 
-	public function getImgUrl(){
+	public function getImg_url(){
 		return $this->image_url;
 	}
-	public function setImgUrl($image_url){
+	public function setImg_url($image_url){
 		$this->image_url=$image_url;
 		return $this;
 	}
