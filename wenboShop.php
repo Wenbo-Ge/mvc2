@@ -40,7 +40,7 @@ require_once('wenboShop-database.php');
 ?>
         <div class="col">
             <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<?php echo $value->getImgUrl(); ?>" alt="Card image cap" onmouseover="alert('<?php echo $value->getDescription(); ?>')">
+            <img class="card-img-top" src="<?php echo $value->getImg_url(); ?>" alt="Card image cap">
             <div class="card-body">
               <p class="card-title"><?php
                   echo $value->getName();
